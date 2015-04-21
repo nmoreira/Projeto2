@@ -16,13 +16,75 @@
 			<f:selectItem itemValue="" itemLabel="Científica" itemDescription="Usar calculadora Científica"/>
 		</h:selectOneRadio>
 		<br />
-		<h:commandButton action="" value="OK" />
+		<h:commandButton action="#{calc.type}" value="OK" />
 	</h:form>
-	
+	<br />
 	<h:form>
-		<h:dataTable>
+		<table style="border: black;">
+			<tr>
+				<td colspan="4">
+					<h:inputText value="#{calc.exp}" disabled="true"/>
+				</td>
+			</tr>
+			<tr> 
+				<td>
+					<h:commandButton id="num7" action="page1" value="7" actionListener="#{calc.key}"/>
+				</td>
+				<td>
+					<h:commandButton id="num8" action="#{calc.key}" value="8" />
+				</td>
+				<td>
+					<h:commandButton id="num9" action="#{calc.key}" value="9" />
+				</td>
+				<td>
+					<h:commandButton id="soma" action="#{calc.key}" value="+" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h:commandButton id="num4" action="#{calc.key}" value="4" />
+				</td>
+				<td>
+					<h:commandButton id="num5" action="#{calc.key}" value="5" />
+				</td>
+				<td>
+					<h:commandButton id="num6" action="#{calc.key}" value="6" />
+				</td>				
+				<td>
+					<h:commandButton id="sub" action="#{calc.key}" value="-" />
+				</td>
+			</tr>
 			
-		</h:dataTable>
+			<tr>
+				<td>
+					<h:commandButton id="num1" action="#{calc.key}" value="1" />
+				</td>
+				<td>
+					<h:commandButton id="num2" action="#{calc.key}" value="2" />
+				</td>
+				<td>
+					<h:commandButton id="num3" action="#{calc.key}" value="3" />
+				</td>
+				<td>
+					<h:commandButton id="mult" action="#{calc.key}" value="*" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h:commandButton id="virg" action="#{calc.key}" value="." />
+				</td>
+				<td>
+					<h:commandButton id="num0" action="#{calc.key}" value="0" />
+				</td>
+				<td>
+					<h:commandButton id="igual" action="#{calc.key}" value="=" />
+				</td>
+				<td>
+					<h:commandButton id="div" action="#{calc.key}" value="/" />
+				</td>
+			</tr>
+			
+		</table>
 	</h:form>
 
 </body>
