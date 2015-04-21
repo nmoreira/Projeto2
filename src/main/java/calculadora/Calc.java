@@ -15,7 +15,7 @@ public class Calc implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String exp="";
-	private String type="";
+	private String type="simple";
 
 
 	public String getType() {
@@ -45,12 +45,21 @@ public class Calc implements Serializable{
 		case "mult": digit="*"; break;
 		case "div": digit="/"; break;
 		case "virg": digit="."; break;
+		case "igual": {
+		
+		}; break;
 		
 		}
 		exp+=digit;
 
-
-
+	}
+	
+	public void clearAll(){
+		this.exp="";
+	}
+	
+	public void clearLast(){
+		exp=exp.substring(0, exp.length()-1);
 	}
 
 	public String getExp() {
