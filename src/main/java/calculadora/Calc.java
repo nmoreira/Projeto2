@@ -3,8 +3,9 @@ package calculadora;
 import java.io.Serializable;
 
 
+import java.util.ArrayList;
+
 import net.objecthunter.exp4j.*;
-//import de.congrace.exp4j.*;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
@@ -20,6 +21,8 @@ public class Calc implements Serializable{
 
 	private String exp="";
 	private String type="";
+	private ArrayList<Entrada> hist;
+	
 	
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido;
@@ -27,9 +30,13 @@ public class Calc implements Serializable{
 	
 	public Calc(){
 		init();
+		hist = new ArrayList<Entrada>();
 	}
-
-
+	
+	public ArrayList<Entrada> getHist() {
+		return hist;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -43,107 +50,46 @@ public class Calc implements Serializable{
 		
 		switch(evento.getComponent().getId()){
 		case "num0": {			
-				digit="0";				
-				operadorValido = true;
-				if(existeVirgula == false){
-					virgulaValida = true;
-				}
-						
+			digit=novoDigito("0");	
 		}break;
 		case "num1": {
-			digit="1";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("1");
 		}break;
 		case "num2": {
-			digit="2";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("2");
 		}break;
 		case "num3": {
-			digit="3";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("3");
 		}break;
 		case "num4": {
-			digit="4";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("4");
 		}break;
 		case "num5": {
-			digit="5";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("5");
 		}break;
 		case "num6": {
-			digit="6";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("6");
 		}break;
 		case "num7": {
-			digit="7";		
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("7");
 		}break;
 		case "num8": {
-			digit="8";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("8");
 		}break;
 		case "num9": {
-			digit="9";			
-			operadorValido = true;
-			if(existeVirgula == false){
-				virgulaValida = true;
-			}
+			digit=novoDigito("9");			
 		}break;
 		case "soma": {
-			if(operadorValido){
-				digit="+"; 
-				operadorValido = false;
-				virgulaValida = false;
-				existeVirgula = false;
-			}			
+			digit=novoOperador("+");		
 		}break;
 		case "sub": {
-			if(operadorValido){
-				digit="-"; 
-				operadorValido = false;
-				virgulaValida = false;
-				existeVirgula = false;
-			}
+			digit=novoOperador("-");
 		}break;
 		case "mult": {
-			if(operadorValido){
-				digit="*"; 
-				operadorValido = false;
-				virgulaValida = false;
-				existeVirgula = false;
-			}
+			digit=novoOperador("*");
 		}break;
 		case "div": {
-			if(operadorValido){
-				digit="/"; 
-				operadorValido = false;
-				virgulaValida = false;
-				existeVirgula = false;
-			}
+			digit=novoOperador("/");
 		}break;
 		case "virg": {
 			if(virgulaValida && existeVirgula == false){
@@ -154,8 +100,14 @@ public class Calc implements Serializable{
 			}
 		} break;
 		case "igual": {
-			exp = opera(exp);
-			init();
+			if(operadorValido == true){
+				String res = opera(exp);
+				hist.add(new Entrada(exp,res));
+				exp=res;
+				init();
+				operadorValido = true;
+			}
+			
 		} break;
 		
 		}
@@ -163,17 +115,43 @@ public class Calc implements Serializable{
 
 	}
 	
+	private String novoDigito(String d){
+		operadorValido = true;
+		if(existeVirgula == false){
+			virgulaValida = true;
+		}
+		return d;
+	}
+	
+	private String novoOperador(String op){
+		if(operadorValido){
+			operadorValido = false;
+			virgulaValida = false;
+			existeVirgula = false;
+			return op;
+		} else return "";
+	}
+	
 	private String opera(String exp){
 		double res;
 		String out;
+		
 		Expression e = new ExpressionBuilder(exp).build();
 		
-		res = e.evaluate();
-		if(res%1 != 0)		
-			out = Double.toString(res);
-		else {
-			out = Integer.toString((int) res);
+		try {
+			res = e.evaluate();
+			
+			if(res%1 != 0)		
+				out = Double.toString(res);
+			else {
+				out = Integer.toString((int) res);
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			out=e1.getMessage();
+			
 		}
+				
 		return out;
 	}
 	
