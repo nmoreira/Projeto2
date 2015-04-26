@@ -3,7 +3,7 @@ package calculadora;
 public class Entrada {
 	private String exp;
 	private String res;
-	
+		
 	public Entrada(String exp, String res) {
 		super();
 		this.exp = exp;
@@ -17,6 +17,5 @@ public class Entrada {
 	public String getRes() {
 		return res;
 	}
-	
 	
 }
