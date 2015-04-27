@@ -1,6 +1,6 @@
 package calculadora;
 
-import java.io.IOException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
-import DataIO.FicheiroDeObjetos;
+
 
 @Named
 @SessionScoped
@@ -190,62 +190,62 @@ public class Calc implements Serializable{
 		this.exp = exp;
 	}
 	
-	/*
-	 * Método que grava num ficheiro estatistica.dat o objecto do tipo Estatistica, 
-	 * que contém os dados estatísticos de utilização da calculadora.
-	 */
-	
-	public void gravaEstatistica(){
-		FicheiroDeObjetos gravaEst = new FicheiroDeObjetos();
-		try {
-			gravaEst.abreEscrita("estatistica.dat");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			gravaEst.escreveObjeto(est);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			gravaEst.fechaEscrita();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Método que procura lê o ficheiro estatistica.dat. Caso não encontre, 
-	 * cria um novo e guarda-o logo usando o método gravaEstatistica().
-	 */
-	public void leEstatistica() {
-		
-		FicheiroDeObjetos leEst = new FicheiroDeObjetos();
-						
-		try {
-			leEst.abreLeitura("estatistica.dat");
-		} catch (IOException e1) {
-			System.out.println("erro ao ler o ficheiro");
-		}
-		try {
-			est = (Estatistica) leEst.leObjeto();
-		} catch (ClassNotFoundException e) {
-			System.out.println("não foi encontrado o objeto pretendido no ficheiro");
-		} catch (IOException e){
-			System.out.println("Erro ao carregar o ficheiro");
-			est = new Estatistica();
-			gravaEstatistica();			
-		}
-		try {
-			leEst.fechaLeitura();
-		} catch (IOException e) {
-			System.out.println("erro ao fechar a leitura");
-		}
-			
-	}
+//	/*
+//	 * Método que grava num ficheiro estatistica.dat o objecto do tipo Estatistica, 
+//	 * que contém os dados estatísticos de utilização da calculadora.
+//	 */
+//	
+//	public void gravaEstatistica(){
+//		FicheiroDeObjetos gravaEst = new FicheiroDeObjetos();
+//		try {
+//			gravaEst.abreEscrita("estatistica.dat");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		try {
+//			gravaEst.escreveObjeto(est);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		try {
+//			gravaEst.fechaEscrita();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	/**
+//	 * Método que procura lê o ficheiro estatistica.dat. Caso não encontre, 
+//	 * cria um novo e guarda-o logo usando o método gravaEstatistica().
+//	 */
+//	public void leEstatistica() {
+//		
+//		FicheiroDeObjetos leEst = new FicheiroDeObjetos();
+//						
+//		try {
+//			leEst.abreLeitura("estatistica.dat");
+//		} catch (IOException e1) {
+//			System.out.println("erro ao ler o ficheiro");
+//		}
+//		try {
+//			est = (Estatistica) leEst.leObjeto();
+//		} catch (ClassNotFoundException e) {
+//			System.out.println("não foi encontrado o objeto pretendido no ficheiro");
+//		} catch (IOException e){
+//			System.out.println("Erro ao carregar o ficheiro");
+//			est = new Estatistica();
+//			gravaEstatistica();			
+//		}
+//		try {
+//			leEst.fechaLeitura();
+//		} catch (IOException e) {
+//			System.out.println("erro ao fechar a leitura");
+//		}
+//			
+//	}
 	
 	public Estatistica getEst() {
 		return est;
