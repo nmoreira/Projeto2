@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -24,12 +25,16 @@
 		<table>
 			<tr>
 				<td colspan="4">
-					<h:inputText value="#{calc.exp}" disabled="true"/>
+					<h:inputText value="#{calc.exp}" disabled="true" title="Mostrador" />
 				</td>
 			</tr>
 			<tr>
-				<h:commandButton id="clear" value="C(apagar tudo)" action="#{calc.clearAll()}" />
-				<h:commandButton id="clearAll" value="CE(apagar último)" action="#{calc.clearLast()}" />
+			<td>
+				<h:commandButton id="clear" value="C" action="#{calc.clearAll()}" title="Apagar tudo"/>
+			</td>
+			<td>	
+				<h:commandButton id="clearAll" value="&#8592;" action="#{calc.clearLast()}" title="Apagar último dígito"/>
+			</td>
 			</tr>
 			<tr> 
 				<td>
@@ -42,7 +47,7 @@
 					<h:commandButton id="num9" action="page1" value="9" actionListener="#{calc.read}"/>
 				</td>
 				<td>
-					<h:commandButton id="soma" action="page1" value="+" actionListener="#{calc.read}"/>
+					<h:commandButton id="soma" action="page1" value="&#43;" actionListener="#{calc.read}"/>
 				</td>
 			</tr>
 			<tr>
@@ -56,7 +61,7 @@
 					<h:commandButton id="num6" action="page1" value="6" actionListener="#{calc.read}"/>
 				</td>				
 				<td>
-					<h:commandButton id="sub" action="page1" value="-" actionListener="#{calc.read}"/>
+					<h:commandButton id="sub" action="page1" value="&#8722;" actionListener="#{calc.read}"/>
 				</td>
 			</tr>
 			
@@ -71,12 +76,12 @@
 					<h:commandButton id="num3" action="page1" value="3" actionListener="#{calc.read}"/>
 				</td>
 				<td>
-					<h:commandButton id="mult" action="page1" value="*" actionListener="#{calc.read}"/>
+					<h:commandButton id="mult" action="page1" value="&#215;" actionListener="#{calc.read}"/>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h:commandButton id="virg" action="page1" value="." actionListener="#{calc.read}"/>
+					<h:commandButton id="virg" action="page1" value="&#44;" actionListener="#{calc.read}"/>
 				</td>
 				<td>
 					<h:commandButton id="num0" action="page1" value="0" actionListener="#{calc.read}"/>
@@ -85,12 +90,32 @@
 					<h:commandButton id="igual" action="page1" value="=" actionListener="#{calc.read}"/>
 				</td>
 				<td>
-					<h:commandButton id="div" action="page1" value="/" actionListener="#{calc.read}"/>
+					<h:commandButton id="div" action="page1" value="&#247;" actionListener="#{calc.read}"/>
 				</td>
 			</tr>
 			
 		</table>
 	</h:form>
-
+	<br />
+	<h:form>
+	<h:dataTable id="items" value="#{calc.hist}" var="item" border="2">
+		<f:facet name="caption">
+			<h:outputText value="Histórico de operações" />
+		</f:facet>		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Expressão" />
+			</f:facet>
+			<h:commandLink action="#{calc.reUseExp(item)}" value="#{item.exp}" title="Reutilizar esta expressão"/>			
+		</h:column>		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Resultado" />
+			</f:facet>
+			<h:commandLink action="#{calc.reUseResult(item)}" value="#{item.res}" title="Reutilizar este resultado"/>			
+			
+		</h:column>
+	</h:dataTable>
+	</h:form>
 </body>
 </html>
