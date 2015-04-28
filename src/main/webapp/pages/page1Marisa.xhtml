@@ -12,36 +12,43 @@
 
 	<h:form>
 		<div id="calculadora">
-			<div>
-				<p>Escolha o tipo de calculadora:</p>
-				<h:selectOneRadio id="tipo" value="#{calc.type}">
-					<f:selectItem itemValue="simple" itemLabel="Simples"
-						itemDescription="Usar calculadora simples" />
+			<table class="escolhaCalculadora">
+
+				<tr>
+					<td>Escolha o tipo de calculadora:</td>
+				</tr>
+
+				<tr>
+					<td><h:selectOneRadio id="tipo" value="#{calc.type}">
+							<f:selectItem itemValue="simple" itemLabel="Simples"
+								itemDescription="Usar calculadora simples" />
 					<f:selectItem itemValue="science" itemLabel="Científica"
 						itemDescription="Usar calculadora Científica" />
-				</h:selectOneRadio>
 
-				<h:commandButton action="page2" value="OK" />
+					</h:selectOneRadio>
+					</td>
 
-				<br />
+					<!-- <h:commandButton action="page2" value="OK" /> -->
 
-			</div>
+
+				</tr>
+			</table>
 
 
 			<table class="numerosOperacoes">
-			
-				
-			
+
+
+
 				<tr>
 					<td colspan="4"><h:inputText value="#{calc.exp}"
 							disabled="true" /></td>
 				</tr>
-				
+
 				<tr>
-					<td colspan="1"><h:commandButton styleClass="buttons red" id="clear" value="C"
-						action="#{calc.clearAll()}" /></td>
-					<td colspan="1"><h:commandButton styleClass="buttons red" id="clearAll" value="CE"
-						action="#{calc.clearLast()}" /></td>
+					<td colspan="2"><h:commandButton styleClass="buttons red"
+							id="clear" value="C" action="#{calc.clearAll()}" /></td>
+					<td colspan="2"><h:commandButton styleClass="buttons red"
+							id="clearAll" value="CE" action="#{calc.clearLast()}" /></td>
 				</tr>
 
 				<tr>
